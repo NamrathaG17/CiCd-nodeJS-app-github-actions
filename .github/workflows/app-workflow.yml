@@ -1,0 +1,12 @@
+name: Main project workflow
+
+on:
+  push
+
+jobs:
+  first-job:
+    name: First Job for Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing step 1
+        run: echo "Hello!!!"
