@@ -10,3 +10,30 @@ jobs:
     steps:
       - name: Printing step 1
         run: echo "Hello!!!"
+      - name: checkout-repo
+        uses: actions/checkout@v7
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22.12.0' 
+          cache: 'npm'
+
+      - name: Install Dependency
+        run: npm install
+
+      - name: Unit testing
+        run: node --test app.test.js
+
+  # Docker:
+  #   name: Docker setup and push image
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: checkout
+  #       action: 
+  #     - name: docker login
+  #       action: 
+  #     - name: Build Docker image
+  #       action: 
+          
+
