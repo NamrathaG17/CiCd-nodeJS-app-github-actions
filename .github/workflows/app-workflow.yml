@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/node-app:v1
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/node-app:${{ github.sha }}
 
       - name: Post push
         run: echo "Image pushed to docker registry!!!"
