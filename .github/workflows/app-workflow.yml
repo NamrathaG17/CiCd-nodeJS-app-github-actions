@@ -32,6 +32,8 @@ jobs:
     name: Docker setup and push image
     runs-on: ubuntu-latest
     needs: unit-testing 
+    environment:
+      name: development
     steps:
       - name: Code Checkout
         uses: actions/checkout@v7
@@ -51,9 +53,9 @@ jobs:
       - name: Post push
         run: echo "Image pushed to docker registry!!!"
           
-  image-cleanup:
-      needs: docker
-      uses: ./.github/workflows/cleanup-workflow.yml
-      with:
-        dry_run: true
+  # image-cleanup:
+  #     needs: docker
+  #     uses: ./.github/workflows/cleanup-workflow.yml
+  #     with:
+  #       dry_run: true
 
