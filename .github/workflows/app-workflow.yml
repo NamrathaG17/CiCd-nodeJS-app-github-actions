@@ -1,11 +1,12 @@
 name: Main project workflow
 
 on:
+  workflow_dispatch: null
   push:
     branches: main
 
 jobs:
-  first-job:
+  unit-testing:
     name: First Job for Print
     runs-on: ubuntu-latest
     steps:
@@ -27,9 +28,10 @@ jobs:
       - name: Unit testing
         run: node --test app.test.js
 
-  Docker:
+  docker:
     name: Docker setup and push image
     runs-on: ubuntu-latest
+    needs: unit-testing 
     steps:
       - name: Code Checkout
         uses: actions/checkout@v7
@@ -49,4 +51,9 @@ jobs:
       - name: Post push
         run: echo "Image pushed to docker registry!!!"
           
+  image-cleanup:
+      needs: docker
+      uses: ./.github/workflows/cleanup-workflow.yml
+      with:
+        dry_run: true
 
