@@ -1,6 +1,6 @@
 name: Manual Docker Cleanup
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       dry_run:
         description: 'Dry run mode'
