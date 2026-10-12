@@ -55,5 +55,5 @@ jobs:
       needs: docker
       uses: ./.github/workflows/cleanup-workflow.yml
       with:
-        dry_run: 'true'
+        dry_run: true
 
