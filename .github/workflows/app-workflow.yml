@@ -40,7 +40,13 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # - name: Build Docker image
-      #   action: 
+      - name: Build Docker image
+        uses: docker/build-push-action@v7
+        with:
+          push: true
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/node-app:v1
+
+      - name: Post push
+        run: echo "Image pushed to docker registry!!!"
           
 
