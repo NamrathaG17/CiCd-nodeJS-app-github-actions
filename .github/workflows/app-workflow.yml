@@ -1,7 +1,8 @@
 name: Main project workflow
 
 on:
-  push
+  push:
+    branches: main
 
 jobs:
   first-job:
@@ -10,7 +11,8 @@ jobs:
     steps:
       - name: Printing step 1
         run: echo "Hello!!!"
-      - name: checkout-repo
+
+      - name: Checkout Code
         uses: actions/checkout@v7
 
       - name: Setup NodeJS
@@ -25,15 +27,20 @@ jobs:
       - name: Unit testing
         run: node --test app.test.js
 
-  # Docker:
-  #   name: Docker setup and push image
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: checkout
-  #       action: 
-  #     - name: docker login
-  #       action: 
-  #     - name: Build Docker image
-  #       action: 
+  Docker:
+    name: Docker setup and push image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v7
+
+      - name: Login to docker hub
+        action: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # - name: Build Docker image
+      #   action: 
           
 
